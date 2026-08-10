@@ -84,5 +84,16 @@ public class ProductController {
             return new ResponseEntity<>(productService.deleteProduct(productId), HttpStatus.OK);
         }
     }
+    @RequestMapping("/products/search")
+    public ResponseEntity<List <Product>> keywordSearch(@RequestParam("keyword") String keyword){
+        List<Product> allfindingProducts = productService.keywordSearchProduct(keyword);
+        System.out.println("keyword is: " + keyword);
+        if (allfindingProducts != null){
+            return new ResponseEntity<>(allfindingProducts, HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 
 }

@@ -59,4 +59,9 @@ public class ProductService {
         productRepo.deleteById(productId);
         return "product deleted successfully";
     }
+
+    public List<Product> keywordSearchProduct(String keyword) {
+        List<Product> keywordSearchProductResult = productRepo.keywordSearchProductResult(keyword);
+        return keywordSearchProductResult;
+    }
 }
