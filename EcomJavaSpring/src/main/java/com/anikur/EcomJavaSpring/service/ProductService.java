@@ -44,7 +44,16 @@ public class ProductService {
         return productRepo.findById(id).orElse(null);
     }
 
-    public Product updateProudct(Product products, MultipartFile image) throws IOException {
+    public Product updateProudct(Product products, Product product, MultipartFile image) throws IOException {
+        products.setName(product.getName());
+        products.setBrand(product.getBrand());
+        products.setDescription(product.getDescription());
+        products.setCategory(product.getCategory());
+        products.setPrice(product.getPrice());
+        products.setStockQuantity(product.getStockQuantity());
+        products.setIsAvailable(product.getIsAvailable());
+        
+        System.out.println("update prodcut service method is calling");
         products.setImageName(image.getOriginalFilename());
         products.setImageType(image.getContentType());
         products.setImageData(image.getBytes());
@@ -60,8 +69,8 @@ public class ProductService {
         return "product deleted successfully";
     }
 
-    public List<Product> keywordSearchProduct(String keyword) {
-        List<Product> keywordSearchProductResult = productRepo.keywordSearchProductResult(keyword);
-        return keywordSearchProductResult;
-    }
+//    public List<Product> keywordSearchProduct(String keyword) {
+//        List<Product> keywordSearchProductResult = productRepo.keywordSearchProductResult(keyword);
+//        return keywordSearchProductResult;
+//    }
 }

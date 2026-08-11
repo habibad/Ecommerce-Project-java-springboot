@@ -60,16 +60,13 @@ public class ProductController {
     }
     @PutMapping("/updateProduct/{productId}")
     public ResponseEntity<Product> updateProduct(@PathVariable("productId") int productId, @RequestPart("product") Product product, @RequestPart("image")MultipartFile image) throws IOException {
-        Product products = productService.fetchProductForUpdate(productId);
-        if(products == null){
+        Product existingProduct = productService.fetchProductForUpdate(productId);
+        if(existingProduct == null){
             System.out.println("update product not found");
             return new ResponseEntity<>( HttpStatus.NOT_FOUND);
         }
         else{
-            System.out.println("the product is fetchfor the update");
-           Product updateProduct =  productService.updateProudct(products, image);
-            System.out.println("update porduct is: "+ updateProduct);
-            return new ResponseEntity<>(updateProduct, HttpStatus.OK);
+           return new ResponseEntity<>(productService.updateProudct(existingProduct, product, image), HttpStatus.OK);
         }
     }
 
@@ -84,16 +81,16 @@ public class ProductController {
             return new ResponseEntity<>(productService.deleteProduct(productId), HttpStatus.OK);
         }
     }
-    @RequestMapping("/products/search")
-    public ResponseEntity<List <Product>> keywordSearch(@RequestParam("keyword") String keyword){
-        List<Product> allfindingProducts = productService.keywordSearchProduct(keyword);
-        System.out.println("keyword is: " + keyword);
-        if (allfindingProducts != null){
-            return new ResponseEntity<>(allfindingProducts, HttpStatus.OK);
-        }
-        else{
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
+//    @RequestMapping("/products/search")
+//    public ResponseEntity<List <Product>> keywordSearch(@RequestParam("keyword") String keyword){
+//        List<Product> allfindingProducts = productService.keywordSearchProduct(keyword);
+//        System.out.println("keyword is: " + keyword);
+//        if (allfindingProducts != null){
+//            return new ResponseEntity<>(allfindingProducts, HttpStatus.OK);
+//        }
+//        else{
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//    }
 
 }
