@@ -52,7 +52,7 @@ public class ProductService {
         products.setPrice(product.getPrice());
         products.setStockQuantity(product.getStockQuantity());
         products.setIsAvailable(product.getIsAvailable());
-        
+
         System.out.println("update prodcut service method is calling");
         products.setImageName(image.getOriginalFilename());
         products.setImageType(image.getContentType());
@@ -69,8 +69,7 @@ public class ProductService {
         return "product deleted successfully";
     }
 
-//    public List<Product> keywordSearchProduct(String keyword) {
-//        List<Product> keywordSearchProductResult = productRepo.keywordSearchProductResult(keyword);
-//        return keywordSearchProductResult;
-//    }
+    public List<Product> keywordSearchProduct(String keyword) {
+        return productRepo.keywordSearchProductResult(keyword);
+    }
 }
