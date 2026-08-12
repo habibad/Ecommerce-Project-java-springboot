@@ -72,7 +72,7 @@ const UpdateProduct = () => {
     console.log("productsdfsfsf", updateProduct)
     const updatedProduct = new FormData();
     if (imageChanged && image) {
-      updatedProduct.append("imageFile", image);
+      updatedProduct.append("image", image);
     } else {
       // Send null or empty value when no image is selected by user
       updatedProduct.append("imageFile", null);
@@ -86,7 +86,7 @@ const UpdateProduct = () => {
 
   console.log("formData : ", updatedProduct)
     axios
-      .put(`${baseUrl}/api/product/${id}`, updatedProduct, {
+      .put(`${baseUrl}/api/updateProduct/${id}`, updatedProduct, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

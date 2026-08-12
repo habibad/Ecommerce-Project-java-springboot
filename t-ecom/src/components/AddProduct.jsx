@@ -85,14 +85,14 @@ const AddProduct = () => {
 
     setLoading(true);
     const formData = new FormData();
-    formData.append("imageFile", image);
+    formData.append("image", image);
     formData.append(
       "product",
       new Blob([JSON.stringify(product)], { type: "application/json" })
     );
 
     axios
-      .post(`${baseUrl}/api/product`, formData, {
+      .post(`${baseUrl}/api/add_product`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       })
       .then((response) => {
