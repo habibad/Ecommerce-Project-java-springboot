@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import unplugged from "../assets/unplugged.png";
 
 const SearchResults = () => {
   const location = useLocation();
@@ -74,11 +75,12 @@ const SearchResults = () => {
               <div key={product.id} className="col">
                 <div className="card h-100 shadow-sm">
                   <img 
-                    src={convertBase64ToDataURL(product.productImage)} 
+                    src={convertBase64ToDataURL(product.imageData)} 
                     className="card-img-top p-3" 
                     alt={product.name}
                     style={{ height: "200px", objectFit: "contain", cursor: "pointer" }}
                     onClick={() => handleViewProduct(product.id)}
+                    onError={(e) => { e.target.src = unplugged; }}
                   />
                   <div className="card-body d-flex flex-column">
                     <h5 className="card-title">{product.name}</h5>
@@ -102,9 +104,9 @@ const SearchResults = () => {
                       <button 
                         className="btn btn-primary btn-sm"
                         onClick={() => handleAddToCart(product.id)}
-                        disabled={!product.productAvailable || product.stockQuantity <= 0}
+                        disabled={!product.isAvailable || product.stockQuantity <= 0}
                       >
-                        {product.productAvailable && product.stockQuantity > 0
+                        {product.isAvailable && product.stockQuantity > 0
                           ? "Add to Cart"
                           : "Out of Stock"}
                       </button>

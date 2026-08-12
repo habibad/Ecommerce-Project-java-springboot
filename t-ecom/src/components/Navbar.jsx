@@ -50,7 +50,7 @@ useEffect(() => {
   // Initial data fetch (if needed)
   const fetchInitialData = async () => {
     try {
-      const response = await axios.get(`${baseUrl}/api/products`);
+      const response = await axios.get(`${baseUrl}/api/allProduct`);
       console.log(response.data, 'navbar initial data');
     } catch (error) {
       console.error("Error fetching initial data:", error);
@@ -79,7 +79,7 @@ const handleLinkClick = () => {
     
     if (input.trim() === "") return;
     
-    setShowNoProductsMessage(false);
+    setShowNoProductsMessage(true);
     setIsLoading(true);
     setIsNavCollapsed(true);
     
@@ -88,12 +88,14 @@ const handleLinkClick = () => {
         `${baseUrl}/api/products/search?keyword=${input}`
       );
       setSearchResults(response.data);
+      console.log("Search results from the api:", response.data);
       
       if (response.data.length === 0) {
         setNoResults(true);
         setShowNoProductsMessage(true);
       } else {
         // Redirect to search results page with the search data
+        console.log("Navigating to search results with data:", response.data);
         navigate(`/search-results`, { state: { searchData: response.data } });
       }
       
@@ -134,7 +136,7 @@ const handleLinkClick = () => {
   return (
     <nav className="navbar navbar-expand-lg fixed-top bg-white shadow-sm" ref={navbarRef}>
       <div className="container-fluid">
-        <a className="navbar-brand" href="https://telusko.com/">
+        <a className="navbar-brand" href="#">
           Telusko
         </a>
         <button
