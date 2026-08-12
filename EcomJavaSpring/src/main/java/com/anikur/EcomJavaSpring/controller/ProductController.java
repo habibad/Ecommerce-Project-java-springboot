@@ -71,8 +71,8 @@ public class ProductController {
     }
 
 
-    @DeleteMapping("/deleteProduct")
-    public ResponseEntity<String> deleteProduct(@RequestParam("productId") int productId){
+    @DeleteMapping("/deleteProduct/{productId}")
+    public ResponseEntity<String> deleteProduct(@PathVariable("productId") int productId){
         Product products = productService.fetchProductForDelete(productId);
         if (products == null){
             return new ResponseEntity<>("product is not found", HttpStatus.NOT_FOUND);

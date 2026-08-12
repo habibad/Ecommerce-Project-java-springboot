@@ -41,7 +41,7 @@ const Product = () => {
 
   const deleteProduct = async () => {
     try {
-      await axios.delete(`${baseUrl}/api/product/${id}`);
+      await axios.delete(`${baseUrl}/api/deleteProduct/${id}`);
       removeFromCart(id);
       console.log("Product deleted successfully");
       toast.success("Product deleted successfully");
